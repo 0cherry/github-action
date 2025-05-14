@@ -1,0 +1,27 @@
+# .github/workflows/review-comment-bot.yml
+
+name: Comment After PR Review
+
+on:
+  pull_request:
+    branches: [ * ]
+
+jobs:
+  comment-on-review:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Leave a comment on the PR
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            👋 **리뷰가 제출되었습니다!**
+
+            - **리뷰어**: ${{ github.event.review.user.login }}
+            - **리뷰 상태**: `${{ github.event.review.state }}`
+            - **내용**: 
+              > ${{ github.event.review.body }}
+
+            감사합니다! 🙌

@@ -2,9 +2,7 @@
 
 name: Comment After PR Review
 
-on:
-  pull_request:
-    branches: [ * ]
+on: pull_request
 
 jobs:
   comment-on-review:
